@@ -36,7 +36,7 @@ struct qaK0sTrackingEfficiency {
   {
     const AxisSpec RAxis{100, 0.f, 10.f, "#it{R} (cm)"};
     const AxisSpec pTAxis{200, 0.f, 10.f, "#it{p}_{T} (GeV/#it{c})"};
-    const AxisSpec mAxis{200, 0.4f, 0.6f, "#it{m} (GeV/#it{c}^{2})"};    
+    const AxisSpec mAxis{200, 0.4f, 0.6f, "#it{m} (GeV/#it{c}^{2})"};
     const AxisSpec statusAxis{2, -0.5f, 1.5f, ""};
     const AxisSpec hitMapAxis{128, -0.5f, 127.5f, ""};
 
@@ -100,7 +100,7 @@ struct qaK0sTrackingEfficiency {
         registry.fill(HIST("Test/h_negITSStatus"), reconegtrack.hasITS());
         registry.fill(HIST("Test/h_posITSStatus"), recopostrack.hasITS());
 
-        uint8_t negITSHitMap = reconegtrack.itsClusterMap(); 
+        uint8_t negITSHitMap = reconegtrack.itsClusterMap();
         uint8_t posITSHitMap = recopostrack.itsClusterMap();
         registry.fill(HIST("Test/h_negITSHitMap"), negITSHitMap);
         registry.fill(HIST("Test/h_posITSHitMap"), posITSHitMap);
