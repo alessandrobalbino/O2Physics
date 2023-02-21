@@ -70,7 +70,7 @@ struct perfK0sResolution {
     if (v0.v0cosPA(collision.posX(), collision.posY(), collision.posZ()) < v0setting_cospa)
       return kFALSE;
     if (v0.v0radius() < v0setting_radius)
-      return kFALSE; 
+      return kFALSE;
     if (v0.distovertotmom(collision.posX(), collision.posY(), collision.posZ()) * RecoDecay::getMassPDG(kK0Short) > 2.684 * v0lifetime)
       return kFALSE;
 
@@ -82,20 +82,20 @@ struct perfK0sResolution {
     return kTRUE;
   }
 
-  Filter v0Filter = nabs(aod::v0data::dcapostopv) > v0setting_dcapostopv && nabs(aod::v0data::dcanegtopv) > v0setting_dcanegtopv && aod::v0data::dcaV0daughters < v0setting_dcav0dau;
+  Filter v0Filter = nabs(aod::v0data::dcapostopv) > v0setting_dcapostopv&& nabs(aod::v0data::dcanegtopv) > v0setting_dcanegtopv&& aod::v0data::dcaV0daughters < v0setting_dcav0dau;
 
   void process(SelectedCollisions::iterator const& collision, soa::Filtered<aod::V0Datas> const& fullV0s, PIDTracks const& tracks)
   {
-    if (eventSelection && !collision.sel8()) 
+    if (eventSelection && !collision.sel8())
       return;
-    
+
     for (auto& v0 : fullV0s) {
 
       const auto& posTrack = v0.posTrack_as<PIDTracks>();
       const auto& negTrack = v0.negTrack_as<PIDTracks>();
-      if (!acceptV0(v0, negTrack, posTrack, collision)) 
+      if (!acceptV0(v0, negTrack, posTrack, collision))
         continue;
-      
+
       registry.fill(HIST("h2_masspT"), v0.mK0Short(), v0.pt());
       registry.fill(HIST("h2_masseta"), v0.mK0Short(), v0.eta());
       registry.fill(HIST("h2_massphi"), v0.mK0Short(), v0.phi());
